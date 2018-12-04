@@ -8,5 +8,10 @@ object Calculator {
 
   def multiply(a: Int, b: Int) = a * b
 
-  def divide(a: Int, b: Int) = a / b
+  def divide(a: Int, b: Int) = {
+    if(b == 0)
+      0
+    else
+      a / b
+  }
 }
