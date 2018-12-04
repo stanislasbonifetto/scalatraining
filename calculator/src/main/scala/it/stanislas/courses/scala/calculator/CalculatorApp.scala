@@ -1,5 +1,5 @@
 package it.stanislas.courses.scala.calculator
 
-object Hello extends App {
+object CalculatorApp extends App {
   println("Calculator")
 }
