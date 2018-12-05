@@ -14,4 +14,15 @@ object Calculator {
     else
       a / b
   }
+
+  def calculate(a : Double, operator : String, b: Double): (Option[Double], Option[String]) = {
+    return operator match {
+      case "+" => (Some((a + b)), None)
+      case "-" => (Some((a - b)), None)
+      case "*" => (Some((a * b)), None)
+      case "/" => (Some((a / b)), None)
+      case _ => (None, Some("Any operator"))
+    }
+  }
+
 }
