@@ -4,13 +4,14 @@ import org.scalacheck.Properties
 
 object CalculatorCheckSpec extends Properties("Calculator") {
   import org.scalacheck.Prop.forAll
+  //TODO: should matcher da usare
 
   property("sum") = forAll { (a: Int, b: Int) =>
-    Calculator.sum(a, b) == a + b
+    Calculator.sum(a, b) - a ==  b
   }
 
   property("subtract") = forAll { (a: Int, b: Int) =>
-    Calculator.subtract(a, b) == a - b
+    Calculator.subtract(a, b) + b == a
   }
 
   property("multiply") = forAll { (a: Int, b: Int) =>
@@ -18,7 +19,7 @@ object CalculatorCheckSpec extends Properties("Calculator") {
   }
 
   property("divide") = forAll { (a: Int, b: Int) =>
-    Calculator.divide(a, b) == a / b
+    Calculator.divide(a, b) * b == a //questo fallisce
   }
 
 }

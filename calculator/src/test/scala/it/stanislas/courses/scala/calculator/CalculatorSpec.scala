@@ -1,15 +1,16 @@
 package it.stanislas.courses.scala.calculator
 
 import org.scalatest.WordSpec
+import org.scalatest.Matchers._
 
 class CalculatorSpec extends WordSpec {
-  def a = 1
-  def b = 3
+  private val a = 1
+  private val b = 3
 
   "A Calculator" when{
     "sum" should {
       "a + b" in {
-        assert(Calculator.sum(a, b) == (a + b))
+        Calculator.sum(a, b) should === (a + b)
       }
     }
   }
@@ -17,7 +18,7 @@ class CalculatorSpec extends WordSpec {
   "A Calculator" when{
     "subtract" should {
       "a - b" in {
-        assert(Calculator.subtract(a, b) == (a - b))
+        Calculator.subtract(a, b) should === (a - b)
       }
     }
   }

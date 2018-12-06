@@ -8,6 +8,7 @@ object Calculator {
 
   def multiply(a: Int, b: Int) = a * b
 
+//TODO: deve restituire un tipo diverso perchè deve contenere il caso non valido
   def divide(a: Int, b: Int) = {
     if(b == 0)
       0
@@ -15,13 +16,14 @@ object Calculator {
       a / b
   }
 
-  def calculate(a : Double, operator : String, b: Double): (Option[Double], Option[String]) = {
-    return operator match {
-      case "+" => (Some((a + b)), None)
-      case "-" => (Some((a - b)), None)
-      case "*" => (Some((a * b)), None)
-      case "/" => (Some((a / b)), None)
-      case _ => (None, Some("Any operator"))
+//TODO: usare Either! e gestire errore
+  def calculate(a : Double, operator : String, b: Double): Result = {
+    operator match {
+      case "+" => Number(a + b)
+      case "-" => Number(a - b)
+      case "*" => Number(a * b)
+      case "/" => Number(a / b)
+      case _ => Error("Any operator")
     }
   }
 

@@ -1,34 +1,39 @@
 package it.stanislas.courses.scala.calculator
 
-import it.stanislas.courses.scala.calculator.CalculatorApp.args
 
-object CalculatorApp extends App {
+object CalculatorApp {
   println("Calculator")
 
-  args.length match {
-    case 3 => printComputation(args)
-    case _ => println("dude, i need at least one parameter")
+  def main(args: Array[String]): Unit = {
+
+    val input = parsArgs(args)
+
+    val result = calculateInput(input)
+
+    println(result)
   }
 
-  def printComputation(args : Array[String]) {
-    val a = args(0).toDouble
-    val operator = args(1)
-    val b = args(2).toDouble
-
-    val (v, m) = Calculator.calculate(a, operator, b)
-    val message = prepareMessage(v, m)
-    println(message)
-  }
-
-  def prepareMessage(v : Option[Double], message:  Option[String]) : String = {
-    return (v, message) match {
-      case (x, None) => x.get.toString
-      case (None, m) => m.get
-      case _ => "Something goes wrong"
+  def parsArgs(args: Array[String]) : Input = {
+    args.length match {
+      case 3 => ValidInput(args(0).toDouble, args(1), args(2).toDouble)
+      case _ => InValidInput("Dude pass a calculation like: 1 + 2")
     }
   }
 
+  def calculateInput(input: Input) : String = {
+    input match {
+      case validInput: ValidInput => calculate(validInput)
+      case InValidInput(message) => message
+    }
+  }
 
+  def calculate(input: ValidInput) : String = {
+    val result = Calculator.calculate(input.first, input.operator, input.second)
+    result match {
+      case Number(number) => number.toString
+      case Error(message) => message
+    }
+  }
 
 
 }
